@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        teste db
+    </title>
+</head>
+<body>
+    <div class="form-container">
+        <h1>User Database</h1>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {% if error %}
+          <p class="error">{{ error }}</p>
+          {% endif %}
+          <div class="input-wrapper">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder='Insert your name' required>
+          </div>
+  
+          <div class="input-wrapper">
+            <label for="cpfcnpj">CPF / CNPJ:</label>
+            <input type="text" id="cpfcnpj" name="cpfcnpj" placeholder='Digite seu CPF ou CNPJ' required>
+          </div>
+  
+          <div class="input-wrapper">
+            <label for="CEP">CEP:</label>
+            <input type="text" id="cep" name="cep" placeholder='Digite seu CEP' required>
+          </div>
+
+          <div class="input-wrapper">
+            <label for="inativo">Status do contrato</label>
+            <select name="valuecontrato" id="valuecontrato">
+                <option value="atv">Ativo</option>
+                <option value="intv">Inativo</option>
+              </select>
+          </div> 
+          
+          <input type="submit" value="Submit">
+            {% if cpfcnpjinvalido %}
+              <p style='color: #f00;'>CPF ou CNPJ inválido</p>
+            {% endif %}
+            {% if cepinvalido %}
+              <p style='color: #f00'>CEP inválido</p>
+            {% endif%}
+        </form>
+      </div>
+</body>
+</html>
+

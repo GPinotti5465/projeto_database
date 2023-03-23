@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, height=device-height">
+    <title>teste db</title>
+    <style>
+        /* Common styles for all screen sizes */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #fff;
+        }
+        .form-container {
+            margin: 50px auto;
+            width: 500px;
+            background-color: #222;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .input-wrapper {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: #f00;
+            margin-top: 10px;
+        }
+
+        /* Media query for screens smaller than 768px */
+        @media (max-width: 767px) {
+            .form-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>User Database</h1>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {% if error %}
+          <p class="error">{{ error }}</p>
+          {% endif %}
+          <div class="input-wrapper">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder='Insert your name' required>
+          </div>
+  
+          <div class="input-wrapper">
+            <label for="cpfcnpj">CPF / CNPJ:</label>
+            <input type="text" id="cpfcnpj" name="cpfcnpj" placeholder='Digite seu CPF ou CNPJ' required>
+          </div>
+  
+          <div class="input-wrapper">
+            <label for="CEP">CEP:</label>
+            <input type="text" id="cep" name="cep" placeholder='Digite seu CEP' required>
+          </div>
+
+          <div class="input-wrapper">
+            <label for="inativo">Status do contrato</label>
+            <select name="valuecontrato" id="valuecontrato">
+                <option value="atv">Ativo</option>
+                <option value="intv">Inativo</option>
+              </select>
+          </div> 
+          
+          <input type="submit" value="Submit">
+            {% if cpfcnpjinvalido %}
+              <p class="error">CPF ou CNPJ inválido</p>
+            {% endif %}
+            {% if cepinvalido %}
+              <p class="error">CEP inválido</p>
+            {% endif%}
+        </form>
+      </div>
+</body>
+</html>
